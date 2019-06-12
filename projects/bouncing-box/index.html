@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>Bouncing Box</title>
 	<script src="jquery.min.js"></script>
 
-<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 	<!-- BEGIN CSS -->
 	<style>
-	/*	body{
+		/*	body{
 		/*	background-image: url("https://thumbs.gfycat.com/OblongImpressiveKudu-max-1mb.gif");
 			
            /* background-repeat: no-repeat;
 		}
 		/* TODO 1 */
+
 		.box {
 			width: 70px;
 			height: 70px;
@@ -25,68 +27,98 @@
 			position: absolute;
 			top: 50px;
 			left: 150px;
-			
-			
-			
+
+
+
 		}
 	</style>
 
 </head>
+
 <body class="board">
 	<!-- HTML for the box -->
 	<div class="box">?</div>
 
 	<!-- BEGIN JAVASCRIPT -->
 	<script>
-		(function(){
+		(function() {
 			'use strict'
 			/* global jQuery */
 
 			// jQuery stuff setup for you
 			var box = jQuery('.box');
 			var boardWidth = jQuery('.board').width();
-	
+			var boardHeight = jQuery(window).height();
+
 			// TODO 2 - Variable declarations 
+
+
+
 			var position;
 			var points;
 			var speed;
 			var direction;
-			
+			var randNum;
+			var yPosition;
+			var yDirection;
+
 			position = 0;
 			points = 0;
 			speed = 10;
 			direction = 1;
-			
+			randNum = Math.random() * 100;
+			yPosition = 0;
+			yDirection = 1;
+
+
 			box.css('left', position);
 			box.text(points);
-			
+
+			box.css('top', yPosition);
+
 			function update() {
 				// TODO 3 / 6 / 7 / 8
 				position += speed * direction;
-				console.log("new position " + position);
-				
-				if(position > boardWidth - 35) {
-        			console.log("Right Wall Hit");
-        			direction = -1
-        			console.log(direction);
-    }
+
+				if (position > boardWidth) {
+					console.log("Right Wall Hit");
+					direction = -1
+					console.log(direction);
+				}
 				box.css('left', position);
-				
-				if(position < 0) {
+
+				if (position < 0) {
 					console.log("Left Wall Hit");
 					direction = 1
 					console.log(direction);
 				}
+				
+				
+				yPosition += speed * yDirection;
+				console.log("new position: " + "(" + position + ',' + yPosition + ")");
+
+				if (yPosition > boardHeight) {
+					console.log("bottom Hit");
+					yDirection = -1
+				}
+				box.css('top', yPosition);
+				if (yPosition < 0) {
+					console.log("top hit");
+					yDirection = 1
+				}
+
 			};
 
 
-			
+
 			function handleBoxClick() {
 				// TODO 4 / 5
 				points += 1;
 				box.text(points);
-				position = 0;
+				position = randNum;
+				yDirection = 1;
 				speed += 3;
+
 			};
 
 
@@ -97,4 +129,5 @@
 		})();
 	</script>
 </body>
+
 </html>
