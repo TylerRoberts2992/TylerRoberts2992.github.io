@@ -36,36 +36,37 @@ var background = function (window) {
 
             // this fills the background with a obnoxious blue
             // you should modify this to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'#0099ff');
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'#2c83ba');
             background.addChild(backgroundFill);
             
-            // TODO: 3 - Add a moon and starfield
-            var moon = draw.bitmap('img/moon.png');
-            background.addChild(moon);
+            var imgH = 260;
+            var imgW = 520;
+            var backgroundImage = draw.bitmap('img/bckgrnd.png');
+            background.addChild(backgroundImage);
+            backgroundImage.x = backgroundImage.y = 0;
+            backgroundImage.scaleX = canvasWidth / imgW;
+            backgroundImage.scaleY = groundY / imgH;
             
-            var circle;
-                for(var i=0;i<100;i++) {
-                     circle = draw.circle(10,'white','LightGray',2);
-                     circle.x = canvasWidth*Math.random();
-                     circle.y = groundY*Math.random();
-                      background.addChild(circle);
-}
+            // TODO: 3 - Add a moon and starfield
+           
+
             
             // TODO: 5 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            var buildingHeight = 300;
+            var buildingHeight = 250;
                var building;
-                for(var i=0;i<5;++i) {
-                 building = draw.rect(75,buildingHeight,'LightGray','Black',1);
+                for(var i=0;i<4;i++) {
+                 building = draw.bitmap('img/dolph2.png');
                  building.x = 200*i;
                  building.y = groundY-buildingHeight;
                  background.addChild(building);
                  buildings.push(building);
+          
 }
             
             // TODO 4: Part 1 - Add a tree
-            tree = draw.bitmap('img/tree.png');
+            tree = draw.bitmap('img/sub.png');
                 tree.x = 300;
-                    tree.y = 100;
+                    tree.y = -2;
                     background.addChild(tree);
             
         }
